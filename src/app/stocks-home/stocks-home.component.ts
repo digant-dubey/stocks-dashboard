@@ -12,10 +12,27 @@ export class StocksHomeComponent implements OnInit {
   constructor(private stocksHomeService: StocksHomeService) {}
 
   ngOnInit() {}
-
+  isUpperCase(input: String) {
+    return input == input.toUpperCase();
+  }
   tradeStock() {
     this.stocksHomeService
-      .getQuoteData()
-      .subscribe((results) => ((this.contents = results)));
+      .getQuoteData(this.symbol)
+      .subscribe(
+        (results) => (
+          (this.contents = results),
+          window.localStorage.setItem(
+            this.symbol,
+            JSON.stringify(this.contents)
+          ),
+          console.log(
+            window.localStorage.length,
+            window.localStorage.key(1),
+            this.isUpperCase(window.localStorage.key(1))
+          )
+        )
+      );
+    let data = this.contents;
+    data;
   }
 }
