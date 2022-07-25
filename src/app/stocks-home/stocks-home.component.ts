@@ -8,7 +8,9 @@ import { StocksHomeService } from './stocks-home.service';
 })
 export class StocksHomeComponent implements OnInit {
   symbol: string = '';
-  contents: object = {};
+  contents: object;
+  searchData: any;
+  companyName: string = '';
   constructor(private stocksHomeService: StocksHomeService) {}
 
   ngOnInit() {}
@@ -16,11 +18,9 @@ export class StocksHomeComponent implements OnInit {
     return input == input.toUpperCase();
   }
   tradeStock() {
-    this.stocksHomeService
-      .getQuoteData(this.symbol)
-      .subscribe(
-        (results) => (
-          (this.contents = results),
+    this.stocksHomeService.getQuoteData(this.symbol).subscribe(
+      (results) => {
+        (this.contents = results),
           window.localStorage.setItem(
             this.symbol,
             JSON.stringify(this.contents)
@@ -29,10 +29,26 @@ export class StocksHomeComponent implements OnInit {
             window.localStorage.length,
             window.localStorage.key(1),
             this.isUpperCase(window.localStorage.key(1))
-          )
-        )
-      );
+          );
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
     let data = this.contents;
     data;
+  }
+
+  getCompanyName() {
+    this.stocksHomeService.getCompanyName(this.symbol).subscribe(
+      (data) => {
+        this.searchData = data;
+        console.log(this.searchData);
+        this.companyName = this.searchData.result[0];
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 }
