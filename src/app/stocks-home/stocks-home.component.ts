@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StocksHomeService } from './stocks-home.service';
+import { StocksSearch } from './stocks-search';
 
 @Component({
   selector: 'app-stocks-home',
@@ -8,9 +9,10 @@ import { StocksHomeService } from './stocks-home.service';
 })
 export class StocksHomeComponent implements OnInit {
   symbol: string = '';
-  contents: object;
+  contents: Object;
   searchData: any;
-  companyName: string = '';
+  displayData: Array<Object> = [];
+  //companyName: string = '';
   constructor(private stocksHomeService: StocksHomeService) {}
 
   ngOnInit() {}
@@ -20,23 +22,12 @@ export class StocksHomeComponent implements OnInit {
   tradeStock() {
     this.stocksHomeService.getQuoteData(this.symbol).subscribe(
       (results) => {
-        (this.contents = results),
-          window.localStorage.setItem(
-            this.symbol,
-            JSON.stringify(this.contents)
-          ),
-          console.log(
-            window.localStorage.length,
-            window.localStorage.key(1),
-            this.isUpperCase(window.localStorage.key(1))
-          );
+        this.contents = results;
       },
       (err) => {
         console.log(err);
       }
     );
-    let data = this.contents;
-    data;
   }
 
   getCompanyName() {
@@ -44,11 +35,40 @@ export class StocksHomeComponent implements OnInit {
       (data) => {
         this.searchData = data;
         console.log(this.searchData);
-        this.companyName = this.searchData.result[0];
+        this.saveDataToLocal();
       },
       (err) => {
         console.log(err);
       }
     );
+  }
+
+  saveDataToLocal() {
+    let data = this.contents;
+    data = {
+      ...data,
+      companyName: this.searchData.result[0].description,
+      symbol: this.symbol,
+    };
+    window.localStorage.setItem(this.symbol, JSON.stringify(data)),
+      console.log(
+        window.localStorage.length,
+        window.localStorage.key(1),
+        this.isUpperCase(window.localStorage.key(1))
+      );
+  }
+
+  fetchData() {
+    let i = window.localStorage.length;
+    console.log('length of local data-->>', i);
+    for (let i = 0; i < length; i++) {
+      if (
+        this.isUpperCase(window.localStorage.key(1)) &&
+        window.localStorage.key(1).length > 0 &&
+        window.localStorage.key(1).length < 6
+      ) {
+        this.displayData = this.displayData.concat();
+      }
+    }
   }
 }
