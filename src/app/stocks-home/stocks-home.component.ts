@@ -36,6 +36,7 @@ export class StocksHomeComponent implements OnInit {
         this.searchData = data;
         console.log(this.searchData);
         this.saveDataToLocal();
+        this.fetchData();
       },
       (err) => {
         console.log(err);
@@ -63,12 +64,15 @@ export class StocksHomeComponent implements OnInit {
     console.log('length of local data-->>', i);
     for (let i = 0; i < length; i++) {
       if (
-        this.isUpperCase(window.localStorage.key(1)) &&
-        window.localStorage.key(1).length > 0 &&
-        window.localStorage.key(1).length < 6
+        this.isUpperCase(window.localStorage.key(i)) &&
+        window.localStorage.key(i).length > 0 &&
+        window.localStorage.key(i).length < 6
       ) {
-        this.displayData = this.displayData.concat();
+        this.displayData = this.displayData.concat(
+          JSON.parse(window.localStorage.getItem(window.localStorage.key(i)))
+        );
       }
     }
+    console.log('>>>>>>>>', this.displayData);
   }
 }
