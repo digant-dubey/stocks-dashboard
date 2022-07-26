@@ -11,11 +11,13 @@ export class StocksHomeComponent implements OnInit {
   symbol: string = '';
   contents: Object;
   searchData: any;
-  displayData: Array<Object> = [];
+  displayData: Array<any> = [];
   //companyName: string = '';
   constructor(private stocksHomeService: StocksHomeService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.fetchData();
+  }
   isUpperCase(input: String) {
     return input == input.toUpperCase();
   }
@@ -51,18 +53,20 @@ export class StocksHomeComponent implements OnInit {
       companyName: this.searchData.result[0].description,
       symbol: this.symbol,
     };
-    window.localStorage.setItem(this.symbol, JSON.stringify(data)),
-      console.log(
-        window.localStorage.length,
-        window.localStorage.key(1),
-        this.isUpperCase(window.localStorage.key(1))
-      );
+    if (window.localStorage.getItem(this.symbol) != null) {
+      window.localStorage.setItem(this.symbol, JSON.stringify(data)),
+        console.log(
+          window.localStorage.length,
+          window.localStorage.key(1),
+          this.isUpperCase(window.localStorage.key(1))
+        );
+    }
   }
 
   fetchData() {
-    let i = window.localStorage.length;
-    console.log('length of local data-->>', i);
-    for (let i = 0; i < length; i++) {
+    let storageLength = window.localStorage.length;
+    console.log('length of local data-->>', storageLength);
+    for (let i = 0; i < storageLength; i++) {
       if (
         this.isUpperCase(window.localStorage.key(i)) &&
         window.localStorage.key(i).length > 0 &&
@@ -74,5 +78,10 @@ export class StocksHomeComponent implements OnInit {
       }
     }
     console.log('>>>>>>>>', this.displayData);
+  }
+  removeStock(symbol) {
+    console.log('##############', symbol);
+    window.localStorage.removeItem(symbol);
+    this.fetchData();
   }
 }

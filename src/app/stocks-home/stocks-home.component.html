@@ -23,3 +23,30 @@
     {{ contents | json }}
   </form>
 </div>
+<div *ngIf="displayData.length > 0">
+  <p>{{ displayData[0] | json }}</p>
+  <div
+    style=" border: 1px solid black;width: 500px;"
+    *ngFor="let data of displayData; let i = index"
+  >
+    <div style="width:500px;height: 50px">
+      {{ data.companyName }} <span>(</span>{{ data.symbol }}<span>)</span
+      ><button style="float: right" (click)="removeStock(data.symbol)">
+        X
+      </button>
+    </div>
+    <div>
+      <div>Change Today : {{ data.dp }}%</div>
+      <div>Opening Price : ${{ data.o }}</div>
+      <i *ngIf="data.dp < 0" class="material-icons" style="color: red"
+        >trending_down</i
+      ><i *ngIf="data.dp > 0" class="material-icons" style="color:green"
+        >trending_up</i
+      >
+    </div>
+    <div>
+      <div>Price : $ {{ data.c }}</div>
+      <div>High Price : $ {{ data.h }}</div>
+    </div>
+  </div>
+</div>
