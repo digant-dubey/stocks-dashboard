@@ -38,7 +38,6 @@ export class StocksHomeComponent implements OnInit {
         this.searchData = data;
         console.log(this.searchData);
         this.saveDataToLocal();
-        this.fetchData();
       },
       (err) => {
         console.log(err);
@@ -53,6 +52,10 @@ export class StocksHomeComponent implements OnInit {
       companyName: this.searchData.result[0].description,
       symbol: this.symbol,
     };
+    console.log(
+      typeof window.localStorage.getItem(this.symbol),
+      window.localStorage.getItem(this.symbol)
+    );
     if (window.localStorage.getItem(this.symbol) != null) {
       window.localStorage.setItem(this.symbol, JSON.stringify(data)),
         console.log(
@@ -61,9 +64,11 @@ export class StocksHomeComponent implements OnInit {
           this.isUpperCase(window.localStorage.key(1))
         );
     }
+    this.fetchData();
   }
 
   fetchData() {
+    this.displayData = [];
     let storageLength = window.localStorage.length;
     console.log('length of local data-->>', storageLength);
     for (let i = 0; i < storageLength; i++) {
