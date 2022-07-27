@@ -1,7 +1,14 @@
 <div>
   {{ contents.symbol }}
-  <div *ngFor="let data of contents; let i = index">
-    <div>{{ data.change }} {{ data.mspr }}</div>
+  <div *ngFor="let data of contents.data; let i = index">
+    <div>Month : {{ data.month | monthName }}</div>
+    <div>Change : {{ data.change }}</div>
+    <div>MSPR : {{ data.mspr }}</div>
+    <i *ngIf="data.change < 0" class="material-icons" style="color: red"
+      >trending_down</i
+    ><i *ngIf="data.change > 0" class="material-icons" style="color:green"
+      >trending_up</i
+    >
   </div>
   <button (click)="onBack()">Back</button>
 </div>

@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StocksHomeComponent } from './stocks-home/stocks-home.component';
 import { StocksSentimentComponent } from './stocks-sentiment/stocks-sentiment.component';
+import { MonthNamePipe } from './stocks-sentiment/month-name.pipe';
 
 @NgModule({
   imports: [
@@ -21,7 +22,12 @@ import { StocksSentimentComponent } from './stocks-sentiment/stocks-sentiment.co
     HttpClientModule,
     AppRoutingModule,
   ],
-  declarations: [AppComponent, StocksHomeComponent, StocksSentimentComponent],
+  declarations: [
+    AppComponent,
+    StocksHomeComponent,
+    StocksSentimentComponent,
+    MonthNamePipe,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
