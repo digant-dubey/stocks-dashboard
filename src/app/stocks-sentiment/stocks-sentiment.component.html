@@ -1,0 +1,7 @@
+<div>
+  {{ contents.symbol }}
+  <div *ngFor="let data of contents; let i = index">
+    <div>{{ data.change }} {{ data.mspr }}</div>
+  </div>
+  <button (click)="onBack()">Back</button>
+</div>

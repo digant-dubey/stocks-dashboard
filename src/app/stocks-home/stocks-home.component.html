@@ -48,5 +48,8 @@
       <div>Price : $ {{ data.c }}</div>
       <div>High Price : $ {{ data.h }}</div>
     </div>
+    <a [routerLink]="['/sentiment', data.symbol]">
+      Go to social sentiment details >
+    </a>
   </div>
 </div>
