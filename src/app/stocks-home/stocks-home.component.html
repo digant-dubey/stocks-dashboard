@@ -20,16 +20,14 @@
     >
       Track Stock
     </button>
-    {{ contents | json }}
   </form>
 </div>
 <div *ngIf="displayData.length > 0">
-  <p>{{ displayData[0] | json }}</p>
   <div
-    style=" border: 1px solid black;width: 500px;"
+    style=" border: 1px solid black;width: 300px;"
     *ngFor="let data of displayData; let i = index"
   >
-    <div style="width:500px;height: 50px">
+    <div style="width:300px;height: 50px">
       {{ data.companyName }} <span>(</span>{{ data.symbol }}<span>)</span
       ><button style="float: right" (click)="removeStock(data.symbol)">
         X

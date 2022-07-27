@@ -1,7 +1,7 @@
 <div>
   {{ contents.symbol }}
   <div *ngFor="let data of contents.data; let i = index">
-    <div>Month : {{ data.month | monthName }}</div>
+    <div>Month : {{ data.month | monthName | uppercase }}</div>
     <div>Change : {{ data.change }}</div>
     <div>MSPR : {{ data.mspr }}</div>
     <i *ngIf="data.change < 0" class="material-icons" style="color: red"
