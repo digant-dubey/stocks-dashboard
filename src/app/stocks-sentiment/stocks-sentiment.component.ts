@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { StocksSentimentService } from './stocks-sentiment.service';
 import { Observable } from 'rxjs';
+import { StocksSentiment } from './stocks-sentiment';
 
 @Component({
   selector: 'app-stocks-sentiment',
@@ -11,7 +12,7 @@ import { Observable } from 'rxjs';
 export class StocksSentimentComponent implements OnInit {
   sub;
   symbol: string;
-  contents: any;
+  contents;
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -34,7 +35,7 @@ export class StocksSentimentComponent implements OnInit {
         console.log(this.contents);
       },
       (err) => {
-        console.log(err);
+        //console.log(err);
       }
     );
   }

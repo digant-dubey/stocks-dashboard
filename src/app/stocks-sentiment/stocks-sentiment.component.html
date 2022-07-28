@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="contents; else loading">
   {{ contents.symbol }}
   <div *ngFor="let data of contents.data; let i = index">
     <div>Month : {{ data.month | monthName | uppercase }}</div>
@@ -12,3 +12,4 @@
   </div>
   <button (click)="onBack()">Back</button>
 </div>
+<ng-template #loading> loading... </ng-template>
