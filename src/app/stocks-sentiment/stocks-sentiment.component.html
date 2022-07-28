@@ -1,5 +1,5 @@
 <div *ngIf="contents; else loading">
-  {{ contents.symbol }}
+  <b> {{ companyName }} <span>(</span>{{ contents.symbol }}<span>)</span></b>
   <div *ngFor="let data of contents.data; let i = index">
     <div>Month : {{ data.month | monthName | uppercase }}</div>
     <div>Change : {{ data.change }}</div>

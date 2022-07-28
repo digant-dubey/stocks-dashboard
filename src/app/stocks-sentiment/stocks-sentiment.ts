@@ -10,3 +10,9 @@ export interface Data {
   change: Number;
   mspr: Number;
 }
+
+export interface Params {
+  params: {
+    symbol: String;
+  };
+}

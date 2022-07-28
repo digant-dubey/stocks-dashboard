@@ -10,9 +10,9 @@ import { StocksSentiment } from './stocks-sentiment';
   styleUrls: ['./stocks-sentiment.component.css'],
 })
 export class StocksSentimentComponent implements OnInit {
-  sub;
   symbol: string;
   contents: any;
+  companyName: String;
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -20,7 +20,7 @@ export class StocksSentimentComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.sub = this.activatedRoute.paramMap.subscribe((params) => {
+    this.activatedRoute.paramMap.subscribe((params) => {
       console.log(params);
       this.symbol = params.get('symbol');
       console.log(this.symbol);
@@ -33,14 +33,14 @@ export class StocksSentimentComponent implements OnInit {
       (results) => {
         this.contents = results;
         console.log(this.contents);
+        let data = JSON.parse(window.localStorage.getItem(this.symbol));
+        this.companyName = data.companyName;
+        console.log(window.localStorage.getItem(this.symbol));
       },
       (err) => {
-        //console.log(err);
+        console.log(err);
       }
     );
-  }
-  ngOnDestroy() {
-    this.sub.unsubscribe();
   }
 
   onBack(): void {
