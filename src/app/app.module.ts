@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -19,6 +20,7 @@ import { MonthNamePipe } from './stocks-sentiment/month-name.pipe';
     BrowserAnimationsModule,
     MatInputModule,
     MatButtonModule,
+    MatProgressSpinnerModule,
     HttpClientModule,
     AppRoutingModule,
   ],

@@ -22,6 +22,9 @@
     </button>
   </form>
 </div>
+<div *ngIf="loading">
+  <mat-spinner></mat-spinner>
+</div>
 <div *ngIf="displayData.length > 0">
   <div
     style=" border: 1px solid black;width: 300px;"

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StocksHomeService } from './stocks-home.service';
+import { StocksDisplayData } from './stocks-quote';
 import { StocksSearch } from './stocks-search';
 
 @Component({
@@ -11,7 +12,8 @@ export class StocksHomeComponent implements OnInit {
   symbol: string = '';
   contents: Object;
   searchData: any;
-  displayData: Array<any> = [];
+  displayData: Array<StocksDisplayData> = [];
+  loading: boolean = false;
   //companyName: string = '';
   constructor(private stocksHomeService: StocksHomeService) {}
 
@@ -33,10 +35,12 @@ export class StocksHomeComponent implements OnInit {
   }
 
   getCompanyName() {
+    this.loading = true;
+    this.displayData = [];
     this.stocksHomeService.getCompanyName(this.symbol).subscribe(
       (data) => {
         this.searchData = data;
-        console.log(this.searchData);
+        console.log('searchData', this.searchData);
         this.saveDataToLocal();
       },
       (err) => {
@@ -65,6 +69,7 @@ export class StocksHomeComponent implements OnInit {
         );
     }
     this.fetchData();
+    this.loading = false;
   }
 
   fetchData() {
