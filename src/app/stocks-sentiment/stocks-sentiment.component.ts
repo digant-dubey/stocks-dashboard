@@ -29,18 +29,28 @@ export class StocksSentimentComponent implements OnInit {
   }
 
   getSentimentDetail() {
-    this.stocksSentimentService.getSentimentData(this.symbol).subscribe(
-      (results) => {
-        this.contents = results;
-        console.log(this.contents);
-        let data = JSON.parse(window.localStorage.getItem(this.symbol));
-        this.companyName = data.companyName;
-        console.log(window.localStorage.getItem(this.symbol));
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+    let fromDate: String = '',
+      toDate: String = '';
+    const d = new Date();
+    fromDate =
+      d.getFullYear().toString() + '-0' + (d.getMonth() - 2).toString() + '-01';
+    toDate =
+      d.getFullYear().toString() + '-0' + d.getMonth().toString() + '-01';
+    console.log(fromDate, toDate);
+    this.stocksSentimentService
+      .getSentimentData(this.symbol, fromDate, toDate)
+      .subscribe(
+        (results) => {
+          this.contents = results;
+          console.log(this.contents);
+          let data = JSON.parse(window.localStorage.getItem(this.symbol));
+          this.companyName = data.companyName;
+          console.log(window.localStorage.getItem(this.symbol));
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
   }
 
   onBack(): void {
