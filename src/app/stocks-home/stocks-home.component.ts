@@ -56,7 +56,7 @@ export class StocksHomeComponent implements OnInit {
       typeof window.localStorage.getItem(this.symbol),
       window.localStorage.getItem(this.symbol)
     );
-    if (window.localStorage.getItem(this.symbol) != null) {
+    if (window.localStorage.getItem(this.symbol) == null) {
       window.localStorage.setItem(this.symbol, JSON.stringify(data)),
         console.log(
           window.localStorage.length,
