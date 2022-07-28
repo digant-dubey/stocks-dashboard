@@ -12,7 +12,7 @@ import { StocksSentiment } from './stocks-sentiment';
 export class StocksSentimentComponent implements OnInit {
   sub;
   symbol: string;
-  contents;
+  contents: any;
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,

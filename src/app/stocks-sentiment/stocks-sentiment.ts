@@ -1,5 +1,5 @@
 export interface StocksSentiment {
-  data: [{}];
+  data: Array<Data>;
   symbol: string;
 }
 
