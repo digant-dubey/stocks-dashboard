@@ -1,6 +1,12 @@
-<div *ngIf="contents; else loading">
+<div
+  *ngIf="contents; else loading"
+  style="border: 1px solid black;margin:10px; padding:20px"
+>
   <b> {{ companyName }} <span>(</span>{{ contents.symbol }}<span>)</span></b>
-  <div *ngFor="let data of contents.data; let i = index">
+  <div
+    *ngFor="let data of contents.data; let i = index"
+    style="border: 1px solid black;margin:10px; padding:20px"
+  >
     <div>Month : {{ data.month | monthName | uppercase }}</div>
     <div>Change : {{ data.change }}</div>
     <div>MSPR : {{ data.mspr }}</div>
@@ -10,6 +16,6 @@
       >trending_up</i
     >
   </div>
-  <button (click)="onBack()">Back</button>
+  <button (click)="onBack()">< Back to list of Stocks</button>
 </div>
 <ng-template #loading> <mat-spinner></mat-spinner> </ng-template>

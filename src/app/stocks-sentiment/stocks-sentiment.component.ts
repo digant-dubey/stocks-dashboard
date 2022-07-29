@@ -11,7 +11,7 @@ import { StocksSentiment } from './stocks-sentiment';
 })
 export class StocksSentimentComponent implements OnInit {
   symbol: string;
-  contents: any;
+  contents;
   companyName: String;
   constructor(
     private activatedRoute: ActivatedRoute,

@@ -11,7 +11,7 @@ import { StocksSearch } from './stocks-search';
 export class StocksHomeComponent implements OnInit {
   symbol: string = '';
   contents: Object;
-  searchData: any;
+  searchData;
   displayData: Array<StocksDisplayData> = [];
   loading: boolean = false;
   //companyName: string = '';
